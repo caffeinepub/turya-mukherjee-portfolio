@@ -99,7 +99,7 @@ export function HeroSection() {
             ) : (
               <h1
                 className="font-display leading-[0.9] mb-6"
-                style={{ animation: "fadeInUp 0.7s 0.1s ease both" }}
+                style={{ opacity: 1 }}
               >
                 <span className="block text-[72px] md:text-[88px] lg:text-[100px] font-bold text-foreground tracking-tight">
                   {firstText}
@@ -112,7 +112,17 @@ export function HeroSection() {
                   {firstText.length >= FULL_FIRST.length && !done && (
                     <span className="inline-block w-[3px] h-[0.8em] align-middle bg-foreground/70 ml-1 animate-pulse" />
                   )}
-                  {done && <span className="gradient-text">.</span>}
+                  {done && (
+                    <>
+                      <span className="gradient-text">.</span>
+                      <span
+                        className="inline-block w-[3px] h-[0.8em] align-middle bg-foreground/70 ml-1"
+                        style={{
+                          animation: "blink 1.1s step-start infinite",
+                        }}
+                      />
+                    </>
+                  )}
                 </span>
               </h1>
             )}
