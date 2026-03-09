@@ -62,7 +62,7 @@ export function Navbar() {
             <a
               href="mailto:mukherjee.turya@gmail.com"
               data-ocid="nav.hireme.button"
-              className="inline-flex items-center px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-foreground/85 transition-all hover:shadow-card-hover"
+              className="glass-button inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold"
             >
               Hire Me
             </a>
@@ -89,7 +89,7 @@ export function Navbar() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden transition-all duration-300 overflow-hidden glass-nav ${
-          isMobileOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0 border-0"
+          isMobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 border-0"
         }`}
         style={{
           animation: isMobileOpen ? "slideDown 0.25s ease both" : undefined,
@@ -102,7 +102,7 @@ export function Navbar() {
                 type="button"
                 data-ocid={link.ocid}
                 onClick={() => handleNavClick(link.href)}
-                className="w-full text-left px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary rounded-xl transition-all"
+                className="w-full text-left px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/[0.05] rounded-xl transition-all"
               >
                 {link.label}
               </button>
@@ -112,7 +112,7 @@ export function Navbar() {
             <a
               href="mailto:mukherjee.turya@gmail.com"
               data-ocid="nav.mobile.hireme.button"
-              className="flex items-center justify-center py-3 rounded-full bg-foreground text-background text-sm font-semibold"
+              className="glass-button flex items-center justify-center py-3 rounded-full text-sm font-semibold"
             >
               Hire Me
             </a>

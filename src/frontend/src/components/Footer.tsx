@@ -28,7 +28,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border py-12 bg-secondary/20">
+    <footer
+      className="relative border-t border-border py-12"
+      style={{ background: "oklch(0.09 0.006 255)" }}
+    >
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo */}
@@ -68,7 +71,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all"
+                className="glass-button w-9 h-9 rounded-full flex items-center justify-center hover:border-apple-blue hover:text-apple-blue transition-all"
               >
                 <Icon className="w-4 h-4" />
               </a>

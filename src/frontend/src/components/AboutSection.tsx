@@ -25,7 +25,10 @@ export function AboutSection() {
       id="about"
       data-ocid="about.section"
       ref={sectionRef}
-      className="section-reveal py-28 md:py-36 bg-secondary/30"
+      className="section-reveal py-28 md:py-36"
+      style={{
+        background: "oklch(0.11 0.007 255)",
+      }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
@@ -43,28 +46,35 @@ export function AboutSection() {
           {/* Left: Photo + stats */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start gap-6">
             {/* Photo */}
-            <div className="relative w-56 h-56 md:w-full md:max-w-xs md:h-72 rounded-3xl overflow-hidden shadow-card-hover">
+            <div
+              className="relative w-56 h-56 md:w-full md:max-w-xs md:h-72 rounded-3xl overflow-hidden"
+              style={{
+                border: "1px solid oklch(1 0 0 / 0.1)",
+                boxShadow:
+                  "0 20px 60px oklch(0 0 0 / 0.5), 0 0 0 1px oklch(1 0 0 / 0.05)",
+              }}
+            >
               <img
                 src="/assets/uploads/Linkedin_DP_Professional_atire-1.png"
                 alt="Turya Mukherjee"
                 className="w-full h-full object-cover"
               />
-              {/* Subtle gradient overlay at bottom */}
+              {/* Subtle gradient overlay */}
               <div
-                className="absolute bottom-0 left-0 right-0 h-16"
+                className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(to top, oklch(0.14 0.004 250 / 0.06), transparent)",
+                    "linear-gradient(to top, oklch(0.09 0.006 255 / 0.5), transparent)",
                 }}
               />
             </div>
 
-            {/* Stat pills */}
+            {/* Stat pills — dark glass style */}
             <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {stats.map((s) => (
                 <span
                   key={s.label}
-                  className="text-xs font-medium px-3 py-1.5 rounded-full bg-background border border-border text-foreground shadow-xs"
+                  className="glass-button text-xs font-medium px-3 py-1.5 rounded-full"
                 >
                   {s.label}
                 </span>
@@ -101,7 +111,7 @@ export function AboutSection() {
                   <Badge
                     key={interest}
                     variant="outline"
-                    className="border-border text-foreground/70 hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all text-xs font-medium px-3 py-1.5"
+                    className="border-border text-foreground/70 hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/10 transition-all text-xs font-medium px-3 py-1.5 bg-white/[0.03]"
                   >
                     {interest}
                   </Badge>

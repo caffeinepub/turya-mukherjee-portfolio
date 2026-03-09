@@ -15,23 +15,23 @@ export function HeroSection() {
       data-ocid="hero.section"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Soft background gradient */}
+      {/* Atmospheric dark gradient mesh */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 60% 40%, oklch(0.52 0.18 248 / 0.05) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 20% 80%, oklch(0.62 0.14 165 / 0.04) 0%, transparent 60%)",
+            "radial-gradient(ellipse 80% 60% at 60% 40%, oklch(0.52 0.18 248 / 0.08) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 20% 80%, oklch(0.42 0.12 248 / 0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 10%, oklch(0.30 0.05 255 / 0.12) 0%, transparent 60%)",
         }}
       />
 
-      {/* Subtle dot grid */}
+      {/* Subtle dark dot grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.35]"
+        className="absolute inset-0 pointer-events-none opacity-[0.18]"
         aria-hidden="true"
         style={{
           backgroundImage:
-            "radial-gradient(circle, oklch(0.75 0.005 250) 1px, transparent 1px)",
+            "radial-gradient(circle, oklch(0.60 0.008 250) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
@@ -46,7 +46,7 @@ export function HeroSection() {
               className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase mb-6"
               style={{ animation: "fadeInUp 0.6s 0.0s ease both" }}
             >
-              Finance &amp; Research Professional
+              Finance Major · Research &amp; Investment Professional
             </p>
 
             {/* Name */}
@@ -74,7 +74,7 @@ export function HeroSection() {
               className="text-base md:text-lg text-muted-foreground mb-4 font-medium"
               style={{ animation: "fadeInUp 0.7s 0.2s ease both" }}
             >
-              Finance Graduate · Account Manager · Research &amp; Investment
+              Finance Major (BBA) · Account Manager · Research &amp; Investment
               Analyst
             </p>
 
@@ -102,7 +102,7 @@ export function HeroSection() {
                     window.open(url, "_blank", "noopener,noreferrer");
                   }
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-foreground/85 hover:shadow-card-hover transition-all"
+                className="blue-button inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold"
               >
                 <Download className="w-4 h-4" />
                 Download Resume
@@ -110,7 +110,7 @@ export function HeroSection() {
               <a
                 href="mailto:mukherjee.turya@gmail.com"
                 data-ocid="hero.hireme.button"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-foreground/20 text-foreground text-sm font-semibold hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all"
+                className="glass-button inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold"
               >
                 Hire Me
               </a>
@@ -126,24 +126,28 @@ export function HeroSection() {
               </span>
               <div className="w-5 h-px bg-border" />
               <a
-                href={profile?.socialLinks?.linkedin ?? "https://linkedin.com"}
+                href={
+                  profile?.socialLinks?.linkedin ??
+                  "https://www.linkedin.com/in/turya-mukherjee"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ocid="hero.linkedin.link"
                 aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full flex items-center justify-center border border-border text-muted-foreground hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all"
+                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all hover:border-apple-blue hover:text-apple-blue"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href={
-                  profile?.socialLinks?.instagram ?? "https://instagram.com"
+                  profile?.socialLinks?.instagram ??
+                  "https://www.instagram.com/turjo_mukherjee_"
                 }
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ocid="hero.instagram.link"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full flex items-center justify-center border border-border text-muted-foreground hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all"
+                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all hover:border-apple-blue hover:text-apple-blue"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -159,21 +163,35 @@ export function HeroSection() {
             <div className="relative">
               {/* Decorative ring */}
               <div
-                className="absolute -inset-4 rounded-full border border-apple-blue/15 animate-float"
+                className="absolute -inset-4 rounded-full border border-apple-blue/20 animate-float"
                 aria-hidden="true"
               />
               <div
-                className="absolute -inset-8 rounded-full border border-border/50 animate-float"
+                className="absolute -inset-8 rounded-full border border-white/[0.05] animate-float"
                 aria-hidden="true"
                 style={{ animationDelay: "1s" }}
               />
 
-              {/* Photo container */}
-              <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-border shadow-card-hover">
+              {/* Photo container — dark glass ring */}
+              <div
+                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-white/[0.12]"
+                style={{
+                  boxShadow:
+                    "0 0 40px oklch(0.52 0.18 248 / 0.15), 0 20px 60px oklch(0 0 0 / 0.5)",
+                }}
+              >
                 <img
                   src="/assets/uploads/Linkedin_DP_Professional_atire-1.png"
                   alt="Turya Mukherjee profile"
                   className="w-full h-full object-cover"
+                />
+                {/* Subtle dark vignette overlay */}
+                <div
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at center, transparent 60%, oklch(0 0 0 / 0.3) 100%)",
+                  }}
                 />
               </div>
             </div>

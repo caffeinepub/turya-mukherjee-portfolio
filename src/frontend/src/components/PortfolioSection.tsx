@@ -5,27 +5,43 @@ import { ExternalLink } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Investment Market Analysis",
+    title: "Fuel Cost Analysis – Aviation Sector",
     description:
-      "A deep-dive sector analysis examining market trends, valuation multiples, and investment opportunities across emerging markets.",
-    tags: ["Equity Research", "Valuation", "Macro"],
+      "Conducted econometric analysis on the impact of gasoline price volatility on Indian airline stocks using advanced statistical models, providing strategic insight for risk management and compliance considerations. Generated data-driven insights on risk exposure and stock sensitivity to inform strategic decision-making and long-term financial planning.",
+    tags: ["Econometrics", "Aviation", "Risk Analysis", "Financial Modeling"],
     category: "Research",
+    link: "https://drive.google.com/file/d/14Vpky9SIKYCfwCNo4zCcjRZ-i689_Blr/view",
+    year: "2024",
   },
   {
     id: 2,
-    title: "CaseQuest Diversity Strategy",
+    title: "Ratio Analysis – TATA Motors",
     description:
-      "Semi-finalist submission exploring innovative diversity hiring frameworks for modern enterprises. Comprehensive research with actionable recommendations.",
-    tags: ["Strategy", "HR", "Case Study"],
-    category: "Case Study",
+      "Analyzed 10 years of Tata Motors financial statements (Income Statement, Balance Sheet, and ratio trends) to identify profitability, cost structure, and capital efficiency drivers using Excel-based financial modeling. Conducted margin, growth, and efficiency ratio analysis to evaluate operational performance and debt sustainability.",
+    tags: ["Financial Modeling", "Ratio Analysis", "Excel", "Equity Research"],
+    category: "Research",
+    link: "https://docs.google.com/spreadsheets/d/1pyaltMWBJ7aFLbIi1pzRnXJCumuG7KX3/htmlview#gid=1655937798",
+    year: "2024",
   },
   {
     id: 3,
+    title: "CaseQuest Diversity Strategy",
+    description:
+      "Semi-finalist submission exploring innovative diversity hiring frameworks for modern enterprises. Comprehensive research with actionable recommendations on inclusive hiring practices.",
+    tags: ["Strategy", "HR", "Case Study"],
+    category: "Case Study",
+    link: null,
+    year: "2024",
+  },
+  {
+    id: 4,
     title: "Gatorade Marketing Strategy",
     description:
-      "PepsiCo case study semi-finalist. Developed a full marketing strategy for Gatorade's next growth phase, including consumer segmentation and campaign recommendations.",
+      "PepsiCo case study semi-finalist. Developed a full marketing strategy for Gatorade's next growth phase, including consumer segmentation, channel strategy, and campaign recommendations.",
     tags: ["Marketing", "Strategy", "FMCG"],
     category: "Case Study",
+    link: null,
+    year: "2024",
   },
 ];
 
@@ -65,7 +81,8 @@ export function PortfolioSection() {
       id="portfolio"
       data-ocid="portfolio.section"
       ref={sectionRef}
-      className="section-reveal py-28 md:py-36 bg-secondary/30"
+      className="section-reveal py-28 md:py-36"
+      style={{ background: "oklch(0.11 0.007 255)" }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
@@ -84,42 +101,63 @@ export function PortfolioSection() {
         </p>
 
         {/* Projects Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-          {projects.map((project) => (
-            <article
-              key={project.id}
-              data-ocid={`portfolio.project.card.${project.id}`}
-              className="group bg-card rounded-2xl border border-border p-6 hover:border-apple-blue/30 hover:shadow-card-hover transition-all duration-300 flex flex-col"
-            >
-              {/* Category pill */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/8 px-2.5 py-1 rounded-full">
-                  {project.category}
-                </span>
-                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-24">
+          {projects.map((project) => {
+            const CardWrapper = project.link ? "a" : "div";
+            const linkProps = project.link
+              ? {
+                  href: project.link,
+                  target: "_blank" as const,
+                  rel: "noopener noreferrer",
+                }
+              : {};
 
-              <h3 className="font-display text-base font-bold text-foreground mb-3 leading-snug">
-                {project.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
-                {project.description}
-              </p>
+            return (
+              <CardWrapper
+                key={project.id}
+                {...linkProps}
+                data-ocid={`portfolio.project.card.${project.id}`}
+                className="group glass-card rounded-2xl p-6 hover:border-apple-blue/30 hover:shadow-[0_8px_40px_oklch(0_0_0/0.5)] transition-all duration-300 flex flex-col"
+              >
+                {/* Category pill + year */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full border border-apple-blue/20">
+                    {project.category}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[10px] text-muted-foreground">
+                      {project.year}
+                    </span>
+                    {project.link ? (
+                      <ExternalLink className="w-3.5 h-3.5 text-apple-blue opacity-60 group-hover:opacity-100 transition-opacity" />
+                    ) : (
+                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    )}
+                  </div>
+                </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mt-auto">
-                {project.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                    className="text-xs bg-secondary text-muted-foreground border-0 font-normal"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </article>
-          ))}
+                <h3 className="font-display text-base font-bold text-foreground mb-3 leading-snug">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 mt-auto">
+                  {project.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="text-xs bg-white/[0.06] text-muted-foreground border-0 font-normal"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </CardWrapper>
+            );
+          })}
         </div>
 
         {/* Achievements */}
@@ -142,7 +180,7 @@ export function PortfolioSection() {
               <div
                 key={achievement.id}
                 data-ocid={`portfolio.achievement.card.${achievement.id}`}
-                className="bg-card rounded-2xl border border-border p-8 flex flex-col items-center text-center hover:border-apple-blue/30 hover:shadow-card-hover transition-all duration-300"
+                className="glass-card rounded-2xl p-8 flex flex-col items-center text-center hover:border-apple-blue/30 hover:shadow-[0_8px_40px_oklch(0_0_0/0.5)] transition-all duration-300"
               >
                 {/* Badge image */}
                 <div className="w-24 h-24 mb-5 relative">
@@ -154,7 +192,7 @@ export function PortfolioSection() {
                 </div>
 
                 {/* Badge pill */}
-                <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/8 px-2.5 py-1 rounded-full mb-3">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full mb-3 border border-apple-blue/20">
                   {achievement.badge}
                 </span>
 

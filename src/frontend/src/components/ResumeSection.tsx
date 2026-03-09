@@ -1,61 +1,103 @@
 import { Badge } from "@/components/ui/badge";
 import { useGetProfile } from "@/hooks/useQueries";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Briefcase, Download, GraduationCap } from "lucide-react";
+import { Briefcase, Download, GraduationCap, Users } from "lucide-react";
 
 const experience = [
   {
     id: 1,
-    role: "Research & Investment Services Analyst",
-    company: "Research Firm · To be updated",
-    period: "2023 – Present",
-    description:
-      "Conducted in-depth equity and market research, produced detailed investment reports, and provided data-driven recommendations. Analyzed macroeconomic trends and sector performance to support portfolio decisions.",
-    tags: ["Financial Analysis", "Investment Research", "Equity", "Macro"],
+    role: "Analyst - Research and Investment Services",
+    company: "Tresvista Analytics Pvt. Ltd.",
+    location: "India",
+    period: "Feb 2026 – Mar 2026",
+    bullets: [
+      "Worked mainly with Private Equity clients on research and investment analysis.",
+    ],
+    tags: ["Private Equity", "Investment Research", "Financial Analysis"],
   },
   {
     id: 2,
-    role: "Account Manager",
-    company: "Company · To be updated",
-    period: "2022 – 2023",
-    description:
-      "Managed a portfolio of client accounts, built long-term relationships, and delivered tailored financial solutions. Coordinated cross-functional teams to ensure seamless service delivery and client satisfaction.",
-    tags: [
-      "Client Relations",
-      "Account Management",
-      "Financial Services",
-      "CRM",
+    role: "Associate – Corporate Account Manager",
+    company: "Visit Health Private Limited",
+    location: "Gurugram, India",
+    period: "May 2025 – Dec 2025",
+    bullets: [
+      "Analyzed utilization and service consumption data for 1,000+ insured users, identifying OPD usage patterns, spend trends, benefit adoption rates, and YoY/MoM growth to inform annual renewal discussions.",
+      "Built reporting models in Excel/Pivot (VLOOKUP, INDEX-MATCH) to quantify benefit utilization, unit economics, and insurer payout patterns, supporting pricing policy design decisions.",
+      "Prepared client-facing presentations summarizing insights, performance metrics, and product improvement opportunities; influenced retention and renewal for a ₹12L annual revenue portfolio.",
+      "Built relationships with HR, broker, insurer, and support teams to coordinate cases and prevent service breakdown.",
     ],
+    tags: ["Account Management", "Data Analysis", "Excel", "Client Relations"],
+  },
+  {
+    id: 3,
+    role: "Sales Intern",
+    company: "Curefit – House of Cult",
+    location: "Bengaluru, India",
+    period: "May 2024 – Jul 2024",
+    bullets: [
+      "Performed pricing & benchmarking research for corporate wellness packages to support enterprise sales cycle, generating ₹3,00,000+ in revenue during internship.",
+      "Conducted structured discovery calls & demos for enterprise accounts, capturing buyer objections, product fit signals, and adoption blockers across 3 cities.",
+      "Provided analytical support for decision-making in enterprise sales cycles.",
+    ],
+    tags: ["Sales", "Benchmarking", "Enterprise", "Market Research"],
   },
 ];
 
 const education = [
   {
     id: 1,
-    degree: "Bachelor of Commerce / Finance",
-    institution: "University · To be updated",
-    period: "2019 – 2022",
+    degree: "BBA – Finance and International Business",
+    institution: "Christ University",
+    location: "Bengaluru, India",
+    period: "2022 – 2025",
     description:
-      "Finance specialization with focus on investment analysis, financial modeling, and corporate finance. Graduated with strong academic performance.",
+      "Majored in Finance with focus on financial analysis, investment research, corporate finance, and international business strategy.",
   },
 ];
 
 const skills: Record<string, string[]> = {
-  Analysis: [
-    "Financial Modeling",
-    "Equity Research",
-    "Macro Analysis",
-    "Valuation",
+  "Technical Skills": [
+    "Excel (Advanced: Pivot, VLOOKUP, What-if Analysis)",
+    "PowerPoint (Storyboarding)",
+    "Power BI",
+    "Benchmarking",
+    "Market Research",
+    "Industry Research",
+    "Unit Economics",
+    "Sensitivity Modeling",
+    "Due Diligence",
+    "GTM Analysis",
   ],
-  Tools: ["Excel", "PowerPoint", "Bloomberg (basic)", "Research Databases"],
   "Soft Skills": [
-    "Public Speaking",
-    "Presentation",
-    "Communication",
-    "Team Leadership",
+    "Customer Servicing",
+    "Empathy",
+    "Active Listening",
+    "Expectation Management",
+    "Conflict Resolution",
+    "Problem Ownership",
   ],
-  Competitions: ["Case Study Analysis", "MUN", "Strategy"],
+  Certifications: [
+    "EY Financial Risk Management",
+    "Bloomberg Market Concepts",
+    "Atlassian Agile Project Management Professional",
+    "Six Sigma",
+  ],
 };
+
+const positionsOfResponsibility = [
+  {
+    id: 1,
+    role: "Consulting Intern",
+    organization: "Christ Consulting Club",
+    period: "2023 – 2024",
+    bullets: [
+      "Spearheaded a team of 4 interns to conduct competitive benchmarking study across 20+ universities (IIM/IIT/LSE), analyzing service models, pricing levers, and revenue pathways for consulting units.",
+      "Brown Brews: Interviewed 120+ consumers across Bengaluru to assess product-market fit, pricing sensitivity, and demand drivers, informing launch and distribution strategy.",
+      "Built a financial feasibility model for Hotel Daffodils projecting occupancy, RevPAR, unit economics & ROI sensitivity for funding readiness.",
+    ],
+  },
+];
 
 export function ResumeSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
@@ -66,7 +108,7 @@ export function ResumeSection() {
       id="resume"
       data-ocid="resume.section"
       ref={sectionRef}
-      className="section-reveal py-28 md:py-36"
+      className="section-reveal py-28 md:py-36 bg-background"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
@@ -89,7 +131,7 @@ export function ResumeSection() {
                 window.open(url, "_blank", "noopener,noreferrer");
               }
             }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-foreground/20 text-sm font-semibold text-foreground hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all self-start"
+            className="glass-button inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold self-start"
           >
             <Download className="w-4 h-4" />
             Download PDF
@@ -100,7 +142,7 @@ export function ResumeSection() {
           {/* Experience */}
           <div>
             <div className="flex items-center gap-3 mb-10">
-              <div className="w-8 h-8 rounded-xl bg-apple-blue/8 border border-apple-blue/15 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center">
                 <Briefcase className="w-4 h-4 text-apple-blue" />
               </div>
               <h3 className="font-display text-xl font-bold text-foreground">
@@ -114,7 +156,10 @@ export function ResumeSection() {
                   key={job.id}
                   isLast={idx === experience.length - 1}
                 >
-                  <div className="bg-card rounded-2xl p-5 border border-border hover:border-apple-blue/30 hover:shadow-card-hover transition-all duration-300">
+                  <div
+                    data-ocid={`resume.experience.card.${idx + 1}`}
+                    className="glass-card rounded-2xl p-5 hover:border-apple-blue/30 hover:shadow-[0_8px_30px_oklch(0_0_0/0.4)] transition-all duration-300"
+                  >
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                       <div>
                         <h4 className="font-display font-bold text-foreground text-base">
@@ -123,20 +168,35 @@ export function ResumeSection() {
                         <p className="text-apple-blue text-sm font-medium mt-0.5">
                           {job.company}
                         </p>
+                        {job.location && (
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {job.location}
+                          </p>
+                        )}
                       </div>
-                      <span className="font-mono text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full border border-border">
+                      <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
                         {job.period}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      {job.description}
-                    </p>
+                    <ul className="mb-4 space-y-1.5">
+                      {job.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="text-sm text-muted-foreground leading-relaxed flex gap-2"
+                        >
+                          <span className="mt-[3px] shrink-0 text-apple-blue/60">
+                            ·
+                          </span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
                     <div className="flex flex-wrap gap-1.5">
                       {job.tags.map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="text-xs bg-secondary text-muted-foreground border-0 font-normal"
+                          className="text-xs bg-white/[0.06] text-muted-foreground border-0 font-normal"
                         >
                           {tag}
                         </Badge>
@@ -153,7 +213,7 @@ export function ResumeSection() {
             {/* Education */}
             <div>
               <div className="flex items-center gap-3 mb-10">
-                <div className="w-8 h-8 rounded-xl bg-apple-blue/8 border border-apple-blue/15 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center">
                   <GraduationCap className="w-4 h-4 text-apple-blue" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-foreground">
@@ -166,7 +226,10 @@ export function ResumeSection() {
                     key={edu.id}
                     isLast={idx === education.length - 1}
                   >
-                    <div className="bg-card rounded-2xl p-5 border border-border hover:border-apple-blue/30 transition-all duration-300">
+                    <div
+                      data-ocid={`resume.education.card.${idx + 1}`}
+                      className="glass-card rounded-2xl p-5 hover:border-apple-blue/30 transition-all duration-300"
+                    >
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                         <div>
                           <h4 className="font-display font-bold text-foreground text-base">
@@ -175,8 +238,13 @@ export function ResumeSection() {
                           <p className="text-apple-blue text-sm font-medium mt-0.5">
                             {edu.institution}
                           </p>
+                          {edu.location && (
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {edu.location}
+                            </p>
+                          )}
                         </div>
-                        <span className="font-mono text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full border border-border">
+                        <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
                           {edu.period}
                         </span>
                       </div>
@@ -205,7 +273,7 @@ export function ResumeSection() {
                         <Badge
                           key={skill}
                           variant="outline"
-                          className="border-border text-foreground/70 hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/5 transition-all text-xs font-normal"
+                          className="border-border bg-white/[0.03] text-foreground/70 hover:border-apple-blue hover:text-apple-blue hover:bg-apple-blue/10 transition-all text-xs font-normal"
                         >
                           {skill}
                         </Badge>
@@ -215,6 +283,59 @@ export function ResumeSection() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Positions of Responsibility */}
+        <div className="mt-16">
+          <div className="border-t border-border mb-12" />
+          <div className="flex items-center gap-3 mb-10">
+            <div className="w-8 h-8 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center">
+              <Users className="w-4 h-4 text-apple-blue" />
+            </div>
+            <h3 className="font-display text-xl font-bold text-foreground">
+              Positions of Responsibility
+            </h3>
+          </div>
+          <div className="space-y-6">
+            {positionsOfResponsibility.map((pos, idx) => (
+              <TimelineItem
+                key={pos.id}
+                isLast={idx === positionsOfResponsibility.length - 1}
+              >
+                <div
+                  data-ocid={`resume.position.card.${idx + 1}`}
+                  className="glass-card rounded-2xl p-5 hover:border-apple-blue/30 hover:shadow-[0_8px_30px_oklch(0_0_0/0.4)] transition-all duration-300"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                    <div>
+                      <h4 className="font-display font-bold text-foreground text-base">
+                        {pos.role}
+                      </h4>
+                      <p className="text-apple-blue text-sm font-medium mt-0.5">
+                        {pos.organization}
+                      </p>
+                    </div>
+                    <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
+                      {pos.period}
+                    </span>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {pos.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="text-sm text-muted-foreground leading-relaxed flex gap-2"
+                      >
+                        <span className="mt-[3px] shrink-0 text-apple-blue/60">
+                          ·
+                        </span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </TimelineItem>
+            ))}
           </div>
         </div>
       </div>

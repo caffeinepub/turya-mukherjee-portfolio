@@ -81,7 +81,7 @@ export function ContactSection() {
       id="contact"
       data-ocid="contact.section"
       ref={sectionRef}
-      className="section-reveal py-28 md:py-36"
+      className="section-reveal py-28 md:py-36 bg-background"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
@@ -113,7 +113,7 @@ export function ContactSection() {
             <div className="space-y-4">
               {contactInfo.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-apple-blue/8 border border-apple-blue/15 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-2xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-4 h-4 text-apple-blue" />
                   </div>
                   <div>
@@ -137,18 +137,18 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Hire Me CTA */}
-            <div className="mt-10 p-5 rounded-2xl bg-foreground text-background">
-              <p className="text-sm font-medium mb-1">
+            {/* Hire Me CTA — dark glass card */}
+            <div className="mt-10 p-5 rounded-2xl glass-card">
+              <p className="text-sm font-medium text-foreground mb-1">
                 Ready to work together?
               </p>
-              <p className="text-xs opacity-70 mb-4">
+              <p className="text-xs text-muted-foreground mb-4">
                 Send a direct email for faster response.
               </p>
               <a
                 href="mailto:mukherjee.turya@gmail.com"
                 data-ocid="contact.hireme.button"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-apple-blue hover:underline underline-offset-2 transition-all"
               >
                 <Mail className="w-3.5 h-3.5" />
                 mukherjee.turya@gmail.com
@@ -161,10 +161,10 @@ export function ContactSection() {
             {status === "success" ? (
               <div
                 data-ocid="contact.success_state"
-                className="bg-card rounded-2xl border border-border p-10 flex flex-col items-center justify-center text-center min-h-80"
+                className="glass-card rounded-2xl p-10 flex flex-col items-center justify-center text-center min-h-80"
               >
-                <div className="w-14 h-14 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-5">
-                  <CheckCircle2 className="w-7 h-7 text-green-500" />
+                <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-5">
+                  <CheckCircle2 className="w-7 h-7 text-green-400" />
                 </div>
                 <h3 className="font-display text-2xl font-bold text-foreground mb-3">
                   Message sent!
@@ -184,14 +184,14 @@ export function ContactSection() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="bg-card rounded-2xl border border-border p-8 space-y-5"
+                className="glass-card rounded-2xl p-8 space-y-5"
               >
                 {/* Error banner */}
                 {status === "error" && (
                   <div
                     data-ocid="contact.error_state"
                     role="alert"
-                    className="flex items-start gap-3 p-4 rounded-xl bg-destructive/8 border border-destructive/20 text-sm"
+                    className="flex items-start gap-3 p-4 rounded-xl bg-destructive/10 border border-destructive/25 text-sm"
                   >
                     <AlertCircle className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
                     <div>
@@ -224,7 +224,7 @@ export function ContactSection() {
                       data-ocid="contact.name.input"
                       aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "name-error" : undefined}
-                      className={`bg-secondary border-border focus:border-apple-blue transition-colors rounded-xl ${
+                      className={`bg-white/[0.05] border-border focus:border-apple-blue transition-colors rounded-xl text-foreground placeholder:text-muted-foreground ${
                         errors.name ? "border-destructive" : ""
                       }`}
                     />
@@ -259,7 +259,7 @@ export function ContactSection() {
                       aria-describedby={
                         errors.email ? "email-error" : undefined
                       }
-                      className={`bg-secondary border-border focus:border-apple-blue transition-colors rounded-xl ${
+                      className={`bg-white/[0.05] border-border focus:border-apple-blue transition-colors rounded-xl text-foreground placeholder:text-muted-foreground ${
                         errors.email ? "border-destructive" : ""
                       }`}
                     />
@@ -295,7 +295,7 @@ export function ContactSection() {
                     aria-describedby={
                       errors.message ? "message-error" : undefined
                     }
-                    className={`bg-secondary border-border focus:border-apple-blue transition-colors resize-none rounded-xl ${
+                    className={`bg-white/[0.05] border-border focus:border-apple-blue transition-colors resize-none rounded-xl text-foreground placeholder:text-muted-foreground ${
                       errors.message ? "border-destructive" : ""
                     }`}
                   />
@@ -315,11 +315,15 @@ export function ContactSection() {
                   size="lg"
                   data-ocid="contact.submit.button"
                   disabled={isPending}
-                  className="w-full bg-foreground text-background hover:bg-foreground/85 font-semibold gap-2 rounded-full transition-all"
+                  className="w-full blue-button font-semibold gap-2 rounded-full transition-all border-0"
+                  style={{
+                    background: "oklch(0.52 0.18 248)",
+                    color: "oklch(0.98 0.002 250)",
+                  }}
                 >
                   {isPending ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       Sending...
                     </>
                   ) : (
