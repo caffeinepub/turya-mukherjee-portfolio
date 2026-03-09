@@ -15,23 +15,23 @@ export function HeroSection() {
       data-ocid="hero.section"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Atmospheric dark gradient mesh */}
+      {/* Atmospheric metallic gradient mesh */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 60% 40%, oklch(0.52 0.18 248 / 0.08) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 20% 80%, oklch(0.42 0.12 248 / 0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 10%, oklch(0.30 0.05 255 / 0.12) 0%, transparent 60%)",
+            "radial-gradient(ellipse 80% 60% at 60% 40%, oklch(0.35 0.005 260 / 0.25) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 20% 80%, oklch(0.25 0.003 260 / 0.18) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 10%, oklch(0.18 0.003 260 / 0.30) 0%, transparent 60%)",
         }}
       />
 
       {/* Subtle dark dot grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.18]"
+        className="absolute inset-0 pointer-events-none opacity-[0.12]"
         aria-hidden="true"
         style={{
           backgroundImage:
-            "radial-gradient(circle, oklch(0.60 0.008 250) 1px, transparent 1px)",
+            "radial-gradient(circle, oklch(0.45 0.004 260) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
@@ -64,7 +64,7 @@ export function HeroSection() {
                   Turya
                 </span>
                 <span className="block text-[72px] md:text-[88px] lg:text-[100px] font-bold text-foreground tracking-tight">
-                  Mukherjee<span className="text-apple-blue">.</span>
+                  Mukherjee<span className="gradient-text">.</span>
                 </span>
               </h1>
             )}
@@ -93,20 +93,15 @@ export function HeroSection() {
               className="flex flex-wrap gap-3 justify-center md:justify-start mb-10"
               style={{ animation: "fadeInUp 0.7s 0.4s ease both" }}
             >
-              <button
-                type="button"
+              <a
+                href="/assets/Turya_Mukherjee_Resume_FA-2.pdf"
+                download="Turya_Mukherjee_Resume.pdf"
                 data-ocid="hero.resume.button"
-                onClick={() => {
-                  const url = profile?.resumeUrl;
-                  if (url && url !== "#") {
-                    window.open(url, "_blank", "noopener,noreferrer");
-                  }
-                }}
                 className="blue-button inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold"
               >
                 <Download className="w-4 h-4" />
                 Download Resume
-              </button>
+              </a>
               <a
                 href="mailto:mukherjee.turya@gmail.com"
                 data-ocid="hero.hireme.button"
@@ -134,7 +129,7 @@ export function HeroSection() {
                 rel="noopener noreferrer"
                 data-ocid="hero.linkedin.link"
                 aria-label="LinkedIn"
-                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all hover:border-apple-blue hover:text-apple-blue"
+                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -147,7 +142,7 @@ export function HeroSection() {
                 rel="noopener noreferrer"
                 data-ocid="hero.instagram.link"
                 aria-label="Instagram"
-                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all hover:border-apple-blue hover:text-apple-blue"
+                className="glass-button w-9 h-9 rounded-full flex items-center justify-center transition-all"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -161,27 +156,34 @@ export function HeroSection() {
           >
             {/* Circle frame */}
             <div className="relative">
-              {/* Decorative ring */}
+              {/* Decorative ring — metallic silver */}
               <div
-                className="absolute -inset-4 rounded-full border border-apple-blue/20 animate-float"
+                className="absolute -inset-4 rounded-full animate-float"
                 aria-hidden="true"
+                style={{
+                  border: "1px solid oklch(0.72 0.01 260 / 0.25)",
+                }}
               />
               <div
-                className="absolute -inset-8 rounded-full border border-white/[0.05] animate-float"
+                className="absolute -inset-8 rounded-full animate-float"
                 aria-hidden="true"
-                style={{ animationDelay: "1s" }}
+                style={{
+                  border: "1px solid oklch(1 0 0 / 0.05)",
+                  animationDelay: "1s",
+                }}
               />
 
-              {/* Photo container — dark glass ring */}
+              {/* Photo container — chrome ring */}
               <div
-                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-white/[0.12]"
+                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden"
                 style={{
+                  border: "2px solid oklch(0.65 0.008 260 / 0.35)",
                   boxShadow:
-                    "0 0 40px oklch(0.52 0.18 248 / 0.15), 0 20px 60px oklch(0 0 0 / 0.5)",
+                    "inset 0 1px 0 oklch(1 0 0 / 0.15), 0 0 50px oklch(0.60 0.008 260 / 0.12), 0 25px 70px oklch(0 0 0 / 0.6)",
                 }}
               >
                 <img
-                  src="/assets/uploads/Linkedin_DP_Professional_atire-1.png"
+                  src="/assets/uploads/Linkedin_DP_Professional_atire-1-1.png"
                   alt="Turya Mukherjee profile"
                   className="w-full h-full object-cover"
                 />
@@ -190,7 +192,7 @@ export function HeroSection() {
                   className="absolute inset-0 rounded-full pointer-events-none"
                   style={{
                     background:
-                      "radial-gradient(ellipse at center, transparent 60%, oklch(0 0 0 / 0.3) 100%)",
+                      "radial-gradient(ellipse at center, transparent 60%, oklch(0 0 0 / 0.35) 100%)",
                   }}
                 />
               </div>

@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 
 const projects = [
   {
@@ -53,6 +53,8 @@ const achievements = [
     description:
       "Diversity Hiring Case Competition — Selected as semi-finalist among hundreds of participants for innovative insights on inclusive hiring practices.",
     badge: "Semi-Finalist",
+    certificateLink:
+      "/assets/CASEQuest Certificate_Team Beyond Barriers_Turya Mukherjee-1.pdf",
   },
   {
     id: 2,
@@ -61,6 +63,7 @@ const achievements = [
     description:
       "PepsiCo National Case Study Competition — Developed a winning go-to-market strategy for Gatorade's expansion, recognized as a top submission.",
     badge: "Semi-Finalist",
+    certificateLink: null,
   },
   {
     id: 3,
@@ -69,6 +72,7 @@ const achievements = [
     description:
       "Two-time MUN award winner. Recognized for exceptional research, debate performance, and diplomatic communication skills.",
     badge: "2nd Place",
+    certificateLink: null,
   },
 ];
 
@@ -82,7 +86,7 @@ export function PortfolioSection() {
       data-ocid="portfolio.section"
       ref={sectionRef}
       className="section-reveal py-28 md:py-36"
-      style={{ background: "oklch(0.11 0.007 255)" }}
+      style={{ background: "oklch(0.10 0.004 260)" }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
@@ -117,11 +121,11 @@ export function PortfolioSection() {
                 key={project.id}
                 {...linkProps}
                 data-ocid={`portfolio.project.card.${project.id}`}
-                className="group glass-card rounded-2xl p-6 hover:border-apple-blue/30 hover:shadow-[0_8px_40px_oklch(0_0_0/0.5)] transition-all duration-300 flex flex-col"
+                className="group glass-card metallic-shimmer rounded-2xl p-6 hover:border-white/20 hover:shadow-[0_8px_40px_oklch(0_0_0/0.6)] transition-all duration-300 flex flex-col"
               >
                 {/* Category pill + year */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full border border-apple-blue/20">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full border border-white/10">
                     {project.category}
                   </span>
                   <div className="flex items-center gap-2">
@@ -180,7 +184,7 @@ export function PortfolioSection() {
               <div
                 key={achievement.id}
                 data-ocid={`portfolio.achievement.card.${achievement.id}`}
-                className="glass-card rounded-2xl p-8 flex flex-col items-center text-center hover:border-apple-blue/30 hover:shadow-[0_8px_40px_oklch(0_0_0/0.5)] transition-all duration-300"
+                className="glass-card metallic-shimmer rounded-2xl p-8 flex flex-col items-center text-center hover:border-white/20 hover:shadow-[0_8px_40px_oklch(0_0_0/0.6)] transition-all duration-300"
               >
                 {/* Badge image */}
                 <div className="w-24 h-24 mb-5 relative">
@@ -192,16 +196,30 @@ export function PortfolioSection() {
                 </div>
 
                 {/* Badge pill */}
-                <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full mb-3 border border-apple-blue/20">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-apple-blue bg-apple-blue/10 px-2.5 py-1 rounded-full mb-3 border border-white/10">
                   {achievement.badge}
                 </span>
 
                 <h4 className="font-display font-bold text-foreground text-base mb-3 leading-snug">
                   {achievement.title}
                 </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   {achievement.description}
                 </p>
+
+                {/* Certificate link if available */}
+                {achievement.certificateLink && (
+                  <a
+                    href={achievement.certificateLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-ocid={`portfolio.achievement.certificate.${achievement.id}`}
+                    className="glass-button inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium mt-auto"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    View Certificate
+                  </a>
+                )}
               </div>
             ))}
           </div>

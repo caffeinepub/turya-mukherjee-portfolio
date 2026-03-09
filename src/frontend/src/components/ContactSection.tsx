@@ -317,8 +317,9 @@ export function ContactSection() {
                   disabled={isPending}
                   className="w-full blue-button font-semibold gap-2 rounded-full transition-all border-0"
                   style={{
-                    background: "oklch(0.52 0.18 248)",
-                    color: "oklch(0.98 0.002 250)",
+                    background:
+                      "linear-gradient(145deg, oklch(0.78 0.008 260), oklch(0.60 0.006 260))",
+                    color: "oklch(0.10 0.004 260)",
                   }}
                 >
                   {isPending ? (

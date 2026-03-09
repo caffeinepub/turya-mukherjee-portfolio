@@ -27,7 +27,7 @@ export function AboutSection() {
       ref={sectionRef}
       className="section-reveal py-28 md:py-36"
       style={{
-        background: "oklch(0.11 0.007 255)",
+        background: "oklch(0.10 0.004 260)",
       }}
     >
       <div className="max-w-6xl mx-auto px-6">

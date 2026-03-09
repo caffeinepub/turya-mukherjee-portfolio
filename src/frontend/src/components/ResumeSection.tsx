@@ -358,7 +358,7 @@ function TimelineItem({
           className="absolute left-[5px] top-5 bottom-0 w-px"
           style={{
             background:
-              "linear-gradient(to bottom, oklch(0.52 0.18 248 / 0.3), transparent)",
+              "linear-gradient(to bottom, oklch(0.65 0.008 260 / 0.35), transparent)",
           }}
         />
       )}
