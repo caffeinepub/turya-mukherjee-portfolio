@@ -56,15 +56,16 @@ export function ContactSection() {
     setErrors({});
     setIsSubmitting(true);
     try {
+      // Send as URL-encoded form data — the only format that works with no-cors + Google Apps Script
+      const body = new URLSearchParams({
+        fullName: form.name,
+        email: form.email,
+        message: form.message,
+      });
       await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: form.name,
-          email: form.email,
-          message: form.message,
-        }),
+        body,
       });
       // no-cors returns opaque response — treat any non-thrown result as success
       setStatus("success");
