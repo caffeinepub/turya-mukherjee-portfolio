@@ -26,9 +26,7 @@ export function AboutSection() {
       data-ocid="about.section"
       ref={sectionRef}
       className="section-reveal py-28 md:py-36"
-      style={{
-        background: "oklch(0.10 0.004 260)",
-      }}
+      style={{ background: "oklch(0.10 0.004 260)" }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
@@ -45,31 +43,64 @@ export function AboutSection() {
         <div className="grid md:grid-cols-5 gap-12 lg:gap-20 items-start">
           {/* Left: Photo + stats */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start gap-6">
-            {/* Photo */}
-            <div
-              className="relative w-56 h-56 md:w-full md:max-w-xs md:h-72 rounded-3xl overflow-hidden"
-              style={{
-                border: "1px solid oklch(1 0 0 / 0.1)",
-                boxShadow:
-                  "0 20px 60px oklch(0 0 0 / 0.5), 0 0 0 1px oklch(1 0 0 / 0.05)",
-              }}
-            >
-              <img
-                src="/assets/uploads/Linkedin_DP_Professional_atire-1.png"
-                alt="Turya Mukherjee"
-                className="w-full h-full object-cover"
-              />
-              {/* Subtle gradient overlay */}
+            {/* Photo with ripple rings on hover */}
+            <div className="relative photo-interactive group" data-interactive>
+              {/* Static rings */}
               <div
-                className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(to top, oklch(0.09 0.006 255 / 0.5), transparent)",
-                }}
+                className="absolute -inset-3 rounded-3xl pointer-events-none"
+                aria-hidden="true"
+                style={{ border: "1px solid oklch(0.72 0.01 260 / 0.12)" }}
               />
+              <div
+                className="absolute -inset-6 rounded-3xl pointer-events-none"
+                aria-hidden="true"
+                style={{ border: "1px solid oklch(0.60 0.008 260 / 0.07)" }}
+              />
+              <div
+                className="absolute -inset-10 rounded-3xl pointer-events-none"
+                aria-hidden="true"
+                style={{ border: "1px solid oklch(0.50 0.006 260 / 0.04)" }}
+              />
+
+              {/* Hover ripple rings */}
+              <div
+                className="photo-ring photo-ring-rect photo-ring-1 absolute rounded-3xl pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="photo-ring photo-ring-rect photo-ring-2 absolute rounded-3xl pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="photo-ring photo-ring-rect photo-ring-3 absolute rounded-3xl pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* Photo */}
+              <div
+                className="relative w-56 h-56 md:w-full md:max-w-xs md:h-72 rounded-3xl overflow-hidden photo-glow-container"
+                style={{
+                  border: "1px solid oklch(1 0 0 / 0.1)",
+                  boxShadow:
+                    "0 20px 60px oklch(0 0 0 / 0.5), 0 0 0 1px oklch(1 0 0 / 0.05)",
+                }}
+              >
+                <img
+                  src="/assets/uploads/Linkedin_DP_Professional_atire-1.png"
+                  alt="Turya Mukherjee"
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, oklch(0.09 0.006 255 / 0.5), transparent)",
+                  }}
+                />
+              </div>
             </div>
 
-            {/* Stat pills — dark glass style */}
+            {/* Stat pills */}
             <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {stats.map((s) => (
                 <span
@@ -98,7 +129,6 @@ export function AboutSection() {
               communication, and problem-solving skills.
             </p>
 
-            {/* Divider */}
             <div className="border-t border-border mb-8" />
 
             {/* Interests */}

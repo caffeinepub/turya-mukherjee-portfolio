@@ -154,28 +154,56 @@ export function HeroSection() {
             className="flex flex-col items-center gap-4"
             style={{ animation: "fadeInUp 0.8s 0.2s ease both" }}
           >
-            {/* Circle frame */}
-            <div className="relative">
-              {/* Decorative ring — metallic silver */}
+            {/* Circle frame with ripple rings */}
+            <div className="relative photo-interactive group" data-interactive>
+              {/* Static decorative rings */}
               <div
-                className="absolute -inset-4 rounded-full animate-float"
+                className="absolute -inset-4 rounded-full animate-float pointer-events-none"
                 aria-hidden="true"
-                style={{
-                  border: "1px solid oklch(0.72 0.01 260 / 0.25)",
-                }}
+                style={{ border: "1px solid oklch(0.72 0.01 260 / 0.25)" }}
               />
               <div
-                className="absolute -inset-8 rounded-full animate-float"
+                className="absolute -inset-8 rounded-full animate-float pointer-events-none"
                 aria-hidden="true"
                 style={{
                   border: "1px solid oklch(1 0 0 / 0.05)",
                   animationDelay: "1s",
                 }}
               />
-
-              {/* Photo container — chrome ring */}
               <div
-                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden"
+                className="absolute -inset-12 rounded-full animate-float pointer-events-none"
+                aria-hidden="true"
+                style={{
+                  border: "1px solid oklch(0.65 0.008 260 / 0.10)",
+                  animationDelay: "1.8s",
+                }}
+              />
+              <div
+                className="absolute -inset-16 rounded-full animate-float pointer-events-none"
+                aria-hidden="true"
+                style={{
+                  border: "1px solid oklch(0.55 0.006 260 / 0.06)",
+                  animationDelay: "2.5s",
+                }}
+              />
+
+              {/* Hover ripple rings — visible on hover */}
+              <div
+                className="photo-ring photo-ring-1 absolute rounded-full pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="photo-ring photo-ring-2 absolute rounded-full pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="photo-ring photo-ring-3 absolute rounded-full pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* Photo container */}
+              <div
+                className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden photo-glow-container"
                 style={{
                   border: "2px solid oklch(0.65 0.008 260 / 0.35)",
                   boxShadow:
@@ -187,7 +215,6 @@ export function HeroSection() {
                   alt="Turya Mukherjee profile"
                   className="w-full h-full object-cover"
                 />
-                {/* Subtle dark vignette overlay */}
                 <div
                   className="absolute inset-0 rounded-full pointer-events-none"
                   style={{

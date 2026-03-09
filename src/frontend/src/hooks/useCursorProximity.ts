@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 
 /**
- * Adds a metallic shimmer highlight to buttons and cards
- * based on how close the cursor is.
+ * Two modes:
+ * 1. Proximity shimmer — metallic highlight on glass-card / glass-button within 160px
+ * 2. Hover burst — cursor vanishes, element explodes with bright chrome glow
  */
 export function useCursorProximity() {
   useEffect(() => {
-    const SELECTORS = [
+    const PROXIMITY_SELECTORS = [
       ".glass-button",
       ".blue-button",
       ".glass-card",
@@ -23,20 +24,46 @@ export function useCursorProximity() {
     };
 
     const update = () => {
-      const els = document.querySelectorAll<HTMLElement>(SELECTORS.join(","));
+      const els = document.querySelectorAll<HTMLElement>(
+        PROXIMITY_SELECTORS.join(","),
+      );
       for (const el of els) {
         const rect = el.getBoundingClientRect();
+        // Check if cursor is directly over the element
+        const isHovered =
+          mx >= rect.left &&
+          mx <= rect.right &&
+          my >= rect.top &&
+          my <= rect.bottom;
+
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
         const RADIUS = 160;
 
-        if (dist < RADIUS) {
-          const strength = 1 - dist / RADIUS; // 0-1
+        if (isHovered) {
+          // BURST mode: cursor is invisible, element lights up hard
           const px = ((mx - rect.left) / rect.width) * 100;
           const py = ((my - rect.top) / rect.height) * 100;
 
-          // Metallic highlight: shift from transparent to silver/chrome
+          el.style.setProperty(
+            "--cursor-highlight",
+            `radial-gradient(circle at ${px}% ${py}%, oklch(1 0 0 / 0.22) 0%, oklch(0.88 0.008 260 / 0.18) 30%, oklch(0.72 0.01 260 / 0.08) 60%, transparent 80%)`,
+          );
+          el.style.setProperty(
+            "--cursor-border",
+            "oklch(0.85 0.012 260 / 0.75)",
+          );
+          el.style.setProperty(
+            "--cursor-shadow",
+            "0 0 40px oklch(0.78 0.010 260 / 0.35), 0 0 80px oklch(0.65 0.008 260 / 0.18), inset 0 1px 0 oklch(1 0 0 / 0.25)",
+          );
+        } else if (dist < RADIUS) {
+          // PROXIMITY mode: gentle shimmer
+          const strength = 1 - dist / RADIUS;
+          const px = ((mx - rect.left) / rect.width) * 100;
+          const py = ((my - rect.top) / rect.height) * 100;
+
           const shimmerAlpha = strength * 0.22;
           el.style.setProperty(
             "--cursor-highlight",
