@@ -1,9 +1,50 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProfile } from "@/hooks/useQueries";
 import { ArrowDown, Download, Instagram, Linkedin } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const FULL_FIRST = "Turya";
+const FULL_LAST = "Mukherjee";
+const TYPING_SPEED = 80;
+
+function useTypingAnimation() {
+  const [phase, setPhase] = useState<"first" | "last" | "done">("first");
+  const [firstText, setFirstText] = useState("");
+  const [lastText, setLastText] = useState("");
+
+  useEffect(() => {
+    let idx = 0;
+    const interval = setInterval(() => {
+      idx++;
+      setFirstText(FULL_FIRST.slice(0, idx));
+      if (idx >= FULL_FIRST.length) {
+        clearInterval(interval);
+        setPhase("last");
+      }
+    }, TYPING_SPEED);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== "last") return;
+    let idx = 0;
+    const interval = setInterval(() => {
+      idx++;
+      setLastText(FULL_LAST.slice(0, idx));
+      if (idx >= FULL_LAST.length) {
+        clearInterval(interval);
+        setPhase("done");
+      }
+    }, TYPING_SPEED);
+    return () => clearInterval(interval);
+  }, [phase]);
+
+  return { firstText, lastText, done: phase === "done" };
+}
 
 export function HeroSection() {
   const { data: profile, isLoading } = useGetProfile();
+  const { firstText, lastText, done } = useTypingAnimation();
 
   const scrollToAbout = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
@@ -61,10 +102,17 @@ export function HeroSection() {
                 style={{ animation: "fadeInUp 0.7s 0.1s ease both" }}
               >
                 <span className="block text-[72px] md:text-[88px] lg:text-[100px] font-bold text-foreground tracking-tight">
-                  Turya
+                  {firstText}
+                  {firstText.length < FULL_FIRST.length && (
+                    <span className="inline-block w-[3px] h-[0.8em] align-middle bg-foreground/70 ml-1 animate-pulse" />
+                  )}
                 </span>
                 <span className="block text-[72px] md:text-[88px] lg:text-[100px] font-bold text-foreground tracking-tight">
-                  Mukherjee<span className="gradient-text">.</span>
+                  {lastText}
+                  {firstText.length >= FULL_FIRST.length && !done && (
+                    <span className="inline-block w-[3px] h-[0.8em] align-middle bg-foreground/70 ml-1 animate-pulse" />
+                  )}
+                  {done && <span className="gradient-text">.</span>}
                 </span>
               </h1>
             )}

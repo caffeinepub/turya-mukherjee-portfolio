@@ -19,7 +19,7 @@ const contactInfo = [
   {
     icon: Clock,
     label: "Response time",
-    value: "Within 24–48 hours",
+    value: "1 - 2 hours",
     href: null,
   },
 ];
@@ -186,7 +186,7 @@ export function ContactSection() {
                   Message sent!
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-sm text-sm">
-                  Thanks for reaching out. I'll be in touch within 24–48 hours.
+                  Thanks for reaching out. I'll be in touch within 1-2 hours.
                 </p>
                 <button
                   type="button"
