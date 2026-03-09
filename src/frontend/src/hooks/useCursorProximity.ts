@@ -23,6 +23,18 @@ export function useCursorProximity() {
       my = e.clientY;
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      mx = touch.clientX;
+      my = touch.clientY;
+    };
+
+    const onTouchEnd = () => {
+      mx = -9999;
+      my = -9999;
+    };
+
     const update = () => {
       const els = document.querySelectorAll<HTMLElement>(
         PROXIMITY_SELECTORS.join(","),
@@ -88,10 +100,14 @@ export function useCursorProximity() {
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
     rafId = requestAnimationFrame(update);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
       cancelAnimationFrame(rafId);
     };
   }, []);

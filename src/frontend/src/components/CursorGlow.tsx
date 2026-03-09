@@ -133,14 +133,46 @@ export function CursorGlow() {
       overInteractiveRef.current = false;
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      mouseRef.current = { x: touch.clientX, y: touch.clientY };
+      overInteractiveRef.current = isOverInteractive(
+        touch.clientX,
+        touch.clientY,
+      );
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      mouseRef.current = { x: touch.clientX, y: touch.clientY };
+      overInteractiveRef.current = isOverInteractive(
+        touch.clientX,
+        touch.clientY,
+      );
+    };
+
+    const onTouchEnd = () => {
+      mouseRef.current = { x: -200, y: -200 };
+      trailRef.current = [];
+      overInteractiveRef.current = false;
+    };
+
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
 
     rafRef.current = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
       cancelAnimationFrame(rafRef.current);
     };
   }, [draw]);

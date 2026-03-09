@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useSubmitContactMessage } from "@/hooks/useQueries";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { AlertCircle, CheckCircle2, Clock, Mail, Send } from "lucide-react";
 import { useState } from "react";
+
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyN9NnC1RVPeDxktRxqhfiqY1jSN4pYTh7l_w-q4amdrkTdYjMDln1NSNohRWoRcqyYFQ/exec";
 
 const contactInfo = [
   {
@@ -24,11 +26,11 @@ const contactInfo = [
 
 export function ContactSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
-  const { mutateAsync, isPending } = useSubmitContactMessage();
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -52,12 +54,25 @@ export function ContactSection() {
       return;
     }
     setErrors({});
+    setIsSubmitting(true);
     try {
-      await mutateAsync(form);
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      // no-cors returns opaque response — treat any non-thrown result as success
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
     } catch {
       setStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -314,7 +329,7 @@ export function ContactSection() {
                   type="submit"
                   size="lg"
                   data-ocid="contact.submit.button"
-                  disabled={isPending}
+                  disabled={isSubmitting}
                   className="w-full blue-button font-semibold gap-2 rounded-full transition-all border-0"
                   style={{
                     background:
@@ -322,7 +337,7 @@ export function ContactSection() {
                     color: "oklch(0.10 0.004 260)",
                   }}
                 >
-                  {isPending ? (
+                  {isSubmitting ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       Sending...
