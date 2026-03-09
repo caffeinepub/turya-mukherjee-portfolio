@@ -10,6 +10,8 @@ const experience = [
     company: "Tresvista Analytics Pvt. Ltd.",
     location: "India",
     period: "Feb 2026 – Mar 2026",
+    logo: "/assets/uploads/tresvista_logo-1.jpg",
+    logoClass: "rounded-lg",
     bullets: [
       "Worked mainly with Private Equity clients on research and investment analysis.",
     ],
@@ -21,6 +23,8 @@ const experience = [
     company: "Visit Health Private Limited",
     location: "Gurugram, India",
     period: "May 2025 – Dec 2025",
+    logo: "/assets/uploads/Visit-Health-Logo-3.png",
+    logoClass: "rounded-lg",
     bullets: [
       "Analyzed utilization and service consumption data for 1,000+ insured users, identifying OPD usage patterns, spend trends, benefit adoption rates, and YoY/MoM growth to inform annual renewal discussions.",
       "Built reporting models in Excel/Pivot (VLOOKUP, INDEX-MATCH) to quantify benefit utilization, unit economics, and insurer payout patterns, supporting pricing policy design decisions.",
@@ -35,6 +39,8 @@ const experience = [
     company: "Curefit – House of Cult",
     location: "Bengaluru, India",
     period: "May 2024 – Jul 2024",
+    logo: "/assets/uploads/Cultfit-Logo-2.png",
+    logoClass: "rounded-lg",
     bullets: [
       "Performed pricing & benchmarking research for corporate wellness packages to support enterprise sales cycle, generating ₹3,00,000+ in revenue during internship.",
       "Conducted structured discovery calls & demos for enterprise accounts, capturing buyer objections, product fit signals, and adoption blockers across 3 cities.",
@@ -51,6 +57,8 @@ const education = [
     institution: "Christ University",
     location: "Bengaluru, India",
     period: "2022 – 2025",
+    logo: "/assets/uploads/christ_logo-5.png",
+    logoClass: "rounded-full",
     description:
       "Majored in Finance with focus on financial analysis, investment research, corporate finance, and international business strategy.",
   },
@@ -161,7 +169,7 @@ export function ResumeSection() {
                     className="glass-card rounded-2xl p-5 hover:border-apple-blue/30 hover:shadow-[0_8px_30px_oklch(0_0_0/0.4)] transition-all duration-300"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <h4 className="font-display font-bold text-foreground text-base">
                           {job.role}
                         </h4>
@@ -174,9 +182,20 @@ export function ResumeSection() {
                           </p>
                         )}
                       </div>
-                      <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
-                        {job.period}
-                      </span>
+                      <div className="flex flex-col items-end gap-2 shrink-0">
+                        {job.logo && (
+                          <div className="h-8 w-auto flex items-center justify-center bg-white/[0.06] px-2 py-1 rounded-lg border border-white/[0.08]">
+                            <img
+                              src={job.logo}
+                              alt={job.company}
+                              className={`h-6 w-auto max-w-[72px] object-contain ${job.logoClass ?? ""}`}
+                            />
+                          </div>
+                        )}
+                        <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
+                          {job.period}
+                        </span>
+                      </div>
                     </div>
                     <ul className="mb-4 space-y-1.5">
                       {job.bullets.map((bullet) => (
@@ -231,7 +250,7 @@ export function ResumeSection() {
                       className="glass-card rounded-2xl p-5 hover:border-apple-blue/30 transition-all duration-300"
                     >
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                        <div>
+                        <div className="flex-1 min-w-0">
                           <h4 className="font-display font-bold text-foreground text-base">
                             {edu.degree}
                           </h4>
@@ -244,9 +263,20 @@ export function ResumeSection() {
                             </p>
                           )}
                         </div>
-                        <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
-                          {edu.period}
-                        </span>
+                        <div className="flex flex-col items-end gap-2 shrink-0">
+                          {edu.logo && (
+                            <div className="h-9 w-9 flex items-center justify-center bg-white/[0.06] rounded-full border border-white/[0.08] overflow-hidden">
+                              <img
+                                src={edu.logo}
+                                alt={edu.institution}
+                                className={`h-8 w-8 object-contain ${edu.logoClass ?? ""}`}
+                              />
+                            </div>
+                          )}
+                          <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
+                            {edu.period}
+                          </span>
+                        </div>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {edu.description}

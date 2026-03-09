@@ -55,6 +55,8 @@ const achievements = [
     badge: "Semi-Finalist",
     certificateLink:
       "/assets/CASEQuest Certificate_Team Beyond Barriers_Turya Mukherjee-1.pdf",
+    sponsorLogo: "/assets/uploads/GT-4.png",
+    sponsorName: "Grant Thornton",
   },
   {
     id: 2,
@@ -64,6 +66,8 @@ const achievements = [
       "PepsiCo National Case Study Competition — Developed a winning go-to-market strategy for Gatorade's expansion, recognized as a top submission.",
     badge: "Semi-Finalist",
     certificateLink: null,
+    sponsorLogo: null,
+    sponsorName: null,
   },
   {
     id: 3,
@@ -73,6 +77,8 @@ const achievements = [
       "Two-time MUN award winner. Recognized for exceptional research, debate performance, and diplomatic communication skills.",
     badge: "2nd Place",
     certificateLink: null,
+    sponsorLogo: null,
+    sponsorName: null,
   },
 ];
 
@@ -206,6 +212,22 @@ export function PortfolioSection() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   {achievement.description}
                 </p>
+
+                {/* Sponsor logo if available */}
+                {achievement.sponsorLogo && (
+                  <div className="w-full mb-4">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60 mb-2">
+                      Organized by
+                    </p>
+                    <div className="flex items-center justify-center bg-white/[0.92] rounded-lg px-3 py-2 border border-white/20">
+                      <img
+                        src={achievement.sponsorLogo}
+                        alt={achievement.sponsorName ?? "Sponsor"}
+                        className="h-7 w-auto max-w-[120px] object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {/* Certificate link if available */}
                 {achievement.certificateLink && (
