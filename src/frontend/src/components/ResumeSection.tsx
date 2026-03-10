@@ -216,7 +216,7 @@ export function ResumeSection() {
                           className="text-sm text-muted-foreground leading-relaxed flex gap-2"
                         >
                           <span className="mt-[3px] shrink-0 text-apple-blue/60">
-                            \u00b7
+                            ·
                           </span>
                           <span>{bullet}</span>
                         </li>
@@ -369,7 +369,7 @@ export function ResumeSection() {
                         className="text-sm text-muted-foreground leading-relaxed flex gap-2"
                       >
                         <span className="mt-[3px] shrink-0 text-apple-blue/60">
-                          \u00b7
+                          ·
                         </span>
                         <span>{bullet}</span>
                       </li>
