@@ -19,6 +19,8 @@ const interests = [
 
 export function AboutSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
+  const headerRef = useScrollReveal<HTMLDivElement>();
+  const gridRef = useScrollReveal<HTMLDivElement>();
 
   return (
     <section
@@ -30,7 +32,10 @@ export function AboutSection() {
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
-        <div className="flex items-center gap-3 mb-16">
+        <div
+          ref={headerRef}
+          className="section-reveal flex items-center gap-3 mb-16"
+        >
           <span className="font-mono text-xs text-apple-blue uppercase tracking-[0.2em]">
             01
           </span>
@@ -40,7 +45,10 @@ export function AboutSection() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-5 gap-12 lg:gap-20 items-start">
+        <div
+          ref={gridRef}
+          className="section-reveal grid md:grid-cols-5 gap-12 lg:gap-20 items-start"
+        >
           {/* Left: Photo + stats */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start gap-6">
             {/* Photo with ripple rings on hover */}
@@ -101,7 +109,7 @@ export function AboutSection() {
             </div>
 
             {/* Stat pills */}
-            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start stagger-children">
               {stats.map((s) => (
                 <span
                   key={s.label}
@@ -135,7 +143,7 @@ export function AboutSection() {
               <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
                 Areas of Interest
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 stagger-children">
                 {interests.map((interest) => (
                   <Badge
                     key={interest}

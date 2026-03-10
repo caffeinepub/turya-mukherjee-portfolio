@@ -26,6 +26,8 @@ const contactInfo = [
 
 export function ContactSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
+  const headerRef = useScrollReveal<HTMLDivElement>();
+  const contentRef = useScrollReveal<HTMLDivElement>();
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -56,7 +58,6 @@ export function ContactSection() {
     setErrors({});
     setIsSubmitting(true);
     try {
-      // Send as URL-encoded form data — the only format that works with no-cors + Google Apps Script
       const body = new URLSearchParams({
         fullName: form.name,
         email: form.email,
@@ -67,7 +68,6 @@ export function ContactSection() {
         mode: "no-cors",
         body,
       });
-      // no-cors returns opaque response — treat any non-thrown result as success
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
     } catch {
@@ -101,7 +101,10 @@ export function ContactSection() {
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
-        <div className="flex items-center gap-3 mb-4">
+        <div
+          ref={headerRef}
+          className="section-reveal flex items-center gap-3 mb-4"
+        >
           <span className="font-mono text-xs text-apple-blue uppercase tracking-[0.2em]">
             04
           </span>
@@ -112,10 +115,13 @@ export function ContactSection() {
         </div>
         <p className="text-muted-foreground mb-16 max-w-lg">
           Whether you have an opportunity, want to collaborate on research, or
-          just want to say hello — reach out.
+          just want to say hello \u2014 reach out.
         </p>
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+        <div
+          ref={contentRef}
+          className="section-reveal grid lg:grid-cols-5 gap-12 lg:gap-16"
+        >
           {/* Left: Info */}
           <div className="lg:col-span-2">
             <h3 className="font-display text-2xl font-bold text-foreground mb-3">
@@ -126,7 +132,7 @@ export function ContactSection() {
               or collaborating on impactful research.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-4 stagger-children">
               {contactInfo.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-2xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center flex-shrink-0">
@@ -153,7 +159,7 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Hire Me CTA — dark glass card */}
+            {/* Hire Me CTA */}
             <div className="mt-10 p-5 rounded-2xl glass-card">
               <p className="text-sm font-medium text-foreground mb-1">
                 Ready to work together?
@@ -202,7 +208,6 @@ export function ContactSection() {
                 noValidate
                 className="glass-card rounded-2xl p-8 space-y-5"
               >
-                {/* Error banner */}
                 {status === "error" && (
                   <div
                     data-ocid="contact.error_state"
@@ -223,7 +228,6 @@ export function ContactSection() {
                 )}
 
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {/* Name */}
                   <div className="space-y-1.5">
                     <Label
                       htmlFor="name"
@@ -255,7 +259,6 @@ export function ContactSection() {
                     )}
                   </div>
 
-                  {/* Email */}
                   <div className="space-y-1.5">
                     <Label
                       htmlFor="email"
@@ -291,7 +294,6 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                {/* Message */}
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="message"

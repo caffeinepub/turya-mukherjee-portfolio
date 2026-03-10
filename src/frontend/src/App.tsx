@@ -2,6 +2,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { BackToTop } from "@/components/BackToTop";
 import { ContactSection } from "@/components/ContactSection";
 import { CursorGlow } from "@/components/CursorGlow";
+import { DateBadge } from "@/components/DateBadge";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/HeroSection";
 import { Navbar } from "@/components/Navbar";
@@ -27,6 +28,7 @@ function AppInner() {
       </main>
       <Footer />
       <BackToTop />
+      <DateBadge />
       <Toaster position="bottom-right" richColors />
     </div>
   );

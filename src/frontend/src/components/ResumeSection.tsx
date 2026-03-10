@@ -19,16 +19,16 @@ const experience = [
   },
   {
     id: 2,
-    role: "Associate – Corporate Account Manager",
+    role: "Associate \u2013 Corporate Account Manager",
     company: "Visit Health Private Limited",
     location: "Gurugram, India",
-    period: "May 2025 – Dec 2025",
+    period: "May 2025 \u2013 Dec 2025",
     logo: "/assets/uploads/Visit-Health-Logo-3.png",
     logoClass: "rounded-lg",
     bullets: [
       "Analyzed utilization and service consumption data for 1,000+ insured users, identifying OPD usage patterns, spend trends, benefit adoption rates, and YoY/MoM growth to inform annual renewal discussions.",
       "Built reporting models in Excel/Pivot (VLOOKUP, INDEX-MATCH) to quantify benefit utilization, unit economics, and insurer payout patterns, supporting pricing policy design decisions.",
-      "Prepared client-facing presentations summarizing insights, performance metrics, and product improvement opportunities; influenced retention and renewal for a ₹12L annual revenue portfolio.",
+      "Prepared client-facing presentations summarizing insights, performance metrics, and product improvement opportunities; influenced retention and renewal for a \u20b912L annual revenue portfolio.",
       "Built relationships with HR, broker, insurer, and support teams to coordinate cases and prevent service breakdown.",
     ],
     tags: ["Account Management", "Data Analysis", "Excel", "Client Relations"],
@@ -36,13 +36,13 @@ const experience = [
   {
     id: 3,
     role: "Sales Intern",
-    company: "Curefit – House of Cult",
+    company: "Curefit \u2013 House of Cult",
     location: "Bengaluru, India",
-    period: "May 2024 – Jul 2024",
+    period: "May 2024 \u2013 Jul 2024",
     logo: "/assets/uploads/Cultfit-Logo-2.png",
     logoClass: "rounded-lg",
     bullets: [
-      "Performed pricing & benchmarking research for corporate wellness packages to support enterprise sales cycle, generating ₹3,00,000+ in revenue during internship.",
+      "Performed pricing & benchmarking research for corporate wellness packages to support enterprise sales cycle, generating \u20b93,00,000+ in revenue during internship.",
       "Conducted structured discovery calls & demos for enterprise accounts, capturing buyer objections, product fit signals, and adoption blockers across 3 cities.",
       "Provided analytical support for decision-making in enterprise sales cycles.",
     ],
@@ -53,10 +53,10 @@ const experience = [
 const education = [
   {
     id: 1,
-    degree: "BBA – Finance and International Business",
+    degree: "BBA \u2013 Finance and International Business",
     institution: "Christ University",
     location: "Bengaluru, India",
-    period: "2022 – 2025",
+    period: "2022 \u2013 2025",
     logo: "/assets/uploads/christ_logo-5.png",
     logoClass: "rounded-full",
     description:
@@ -101,7 +101,7 @@ const positionsOfResponsibility = [
     id: 1,
     role: "Consulting Intern",
     organization: "Christ Consulting Club",
-    period: "2023 – 2024",
+    period: "2023 \u2013 2024",
     bullets: [
       "Spearheaded a team of 4 interns to conduct competitive benchmarking study across 20+ universities (IIM/IIT/LSE), analyzing service models, pricing levers, and revenue pathways for consulting units.",
       "Brown Brews: Interviewed 120+ consumers across Bengaluru to assess product-market fit, pricing sensitivity, and demand drivers, informing launch and distribution strategy.",
@@ -112,6 +112,10 @@ const positionsOfResponsibility = [
 
 export function ResumeSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
+  const headerRef = useScrollReveal<HTMLDivElement>();
+  const expRef = useScrollReveal<HTMLDivElement>();
+  const eduSkillsRef = useScrollReveal<HTMLDivElement>();
+  const posRef = useScrollReveal<HTMLDivElement>();
   const { data: profile } = useGetProfile();
 
   return (
@@ -123,7 +127,10 @@ export function ResumeSection() {
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-16">
+        <div
+          ref={headerRef}
+          className="section-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-16"
+        >
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs text-apple-blue uppercase tracking-[0.2em]">
               02
@@ -151,7 +158,7 @@ export function ResumeSection() {
 
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Experience */}
-          <div>
+          <div ref={expRef} className="section-reveal">
             <div className="flex items-center gap-3 mb-10">
               <div className="w-8 h-8 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center">
                 <Briefcase className="w-4 h-4 text-apple-blue" />
@@ -161,7 +168,7 @@ export function ResumeSection() {
               </h3>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 stagger-children">
               {experience.map((job, idx) => (
                 <TimelineItem
                   key={job.id}
@@ -209,7 +216,7 @@ export function ResumeSection() {
                           className="text-sm text-muted-foreground leading-relaxed flex gap-2"
                         >
                           <span className="mt-[3px] shrink-0 text-apple-blue/60">
-                            ·
+                            \u00b7
                           </span>
                           <span>{bullet}</span>
                         </li>
@@ -233,7 +240,7 @@ export function ResumeSection() {
           </div>
 
           {/* Education + Skills */}
-          <div className="space-y-12">
+          <div ref={eduSkillsRef} className="section-reveal space-y-12">
             {/* Education */}
             <div>
               <div className="flex items-center gap-3 mb-10">
@@ -297,7 +304,7 @@ export function ResumeSection() {
               <h3 className="font-display text-xl font-bold text-foreground mb-8">
                 Skills &amp; Tools
               </h3>
-              <div className="space-y-5">
+              <div className="space-y-5 stagger-children">
                 {Object.entries(skills).map(([category, items]) => (
                   <div key={category}>
                     <p className="font-mono text-[10px] text-apple-blue uppercase tracking-[0.2em] mb-3">
@@ -322,7 +329,7 @@ export function ResumeSection() {
         </div>
 
         {/* Positions of Responsibility */}
-        <div className="mt-16">
+        <div ref={posRef} className="section-reveal mt-16">
           <div className="border-t border-border mb-12" />
           <div className="flex items-center gap-3 mb-10">
             <div className="w-8 h-8 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center">
@@ -362,7 +369,7 @@ export function ResumeSection() {
                         className="text-sm text-muted-foreground leading-relaxed flex gap-2"
                       >
                         <span className="mt-[3px] shrink-0 text-apple-blue/60">
-                          ·
+                          \u00b7
                         </span>
                         <span>{bullet}</span>
                       </li>

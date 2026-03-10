@@ -5,7 +5,7 @@ import { ExternalLink, FileText } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Fuel Cost Analysis – Aviation Sector",
+    title: "Fuel Cost Analysis \u2013 Aviation Sector",
     description:
       "Conducted econometric analysis on the impact of gasoline price volatility on Indian airline stocks using advanced statistical models, providing strategic insight for risk management and compliance considerations. Generated data-driven insights on risk exposure and stock sensitivity to inform strategic decision-making and long-term financial planning.",
     tags: ["Econometrics", "Aviation", "Risk Analysis", "Financial Modeling"],
@@ -15,7 +15,7 @@ const projects = [
   },
   {
     id: 2,
-    title: "Ratio Analysis – TATA Motors",
+    title: "Ratio Analysis \u2013 TATA Motors",
     description:
       "Analyzed 10 years of Tata Motors financial statements (Income Statement, Balance Sheet, and ratio trends) to identify profitability, cost structure, and capital efficiency drivers using Excel-based financial modeling. Conducted margin, growth, and efficiency ratio analysis to evaluate operational performance and debt sustainability.",
     tags: ["Financial Modeling", "Ratio Analysis", "Excel", "Equity Research"],
@@ -51,7 +51,7 @@ const achievements = [
     image: "/assets/generated/badge-casequest-transparent.dim_200x200.png",
     title: "CaseQuest Semi-Finalist",
     description:
-      "Diversity Hiring Case Competition — Selected as semi-finalist among hundreds of participants for innovative insights on inclusive hiring practices.",
+      "Diversity Hiring Case Competition \u2014 Selected as semi-finalist among hundreds of participants for innovative insights on inclusive hiring practices.",
     badge: "Semi-Finalist",
     certificateLink:
       "/assets/CASEQuest Certificate_Team Beyond Barriers_Turya Mukherjee-1.pdf",
@@ -63,7 +63,7 @@ const achievements = [
     image: "/assets/generated/badge-pepsico-transparent.dim_200x200.png",
     title: "PepsiCo Gatorade Semi-Finalist",
     description:
-      "PepsiCo National Case Study Competition — Developed a winning go-to-market strategy for Gatorade's expansion, recognized as a top submission.",
+      "PepsiCo National Case Study Competition \u2014 Developed a winning go-to-market strategy for Gatorade's expansion, recognized as a top submission.",
     badge: "Semi-Finalist",
     certificateLink: null,
     sponsorLogo: null,
@@ -72,7 +72,7 @@ const achievements = [
   {
     id: 3,
     image: "/assets/generated/badge-mun-transparent.dim_200x200.png",
-    title: "Model United Nations — 2nd Place",
+    title: "Model United Nations \u2014 2nd Place",
     description:
       "Two-time MUN award winner. Recognized for exceptional research, debate performance, and diplomatic communication skills.",
     badge: "2nd Place",
@@ -84,6 +84,8 @@ const achievements = [
 
 export function PortfolioSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
+  const headerRef = useScrollReveal<HTMLDivElement>();
+  const projectsRef = useScrollReveal<HTMLDivElement>();
   const achievementsRef = useScrollReveal<HTMLDivElement>();
 
   return (
@@ -96,7 +98,10 @@ export function PortfolioSection() {
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section label */}
-        <div className="flex items-center gap-3 mb-4">
+        <div
+          ref={headerRef}
+          className="section-reveal flex items-center gap-3 mb-4"
+        >
           <span className="font-mono text-xs text-apple-blue uppercase tracking-[0.2em]">
             03
           </span>
@@ -111,7 +116,10 @@ export function PortfolioSection() {
         </p>
 
         {/* Projects Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-24">
+        <div
+          ref={projectsRef}
+          className="section-reveal grid sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-24 stagger-children"
+        >
           {projects.map((project) => {
             const CardWrapper = project.link ? "a" : "div";
             const linkProps = project.link
@@ -185,7 +193,7 @@ export function PortfolioSection() {
             competitions.
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
             {achievements.map((achievement) => (
               <div
                 key={achievement.id}
