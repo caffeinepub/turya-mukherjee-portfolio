@@ -116,11 +116,10 @@ export function AboutSection() {
           {/* Right: Bio */}
           <div className="md:col-span-3">
             <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-              I'm a Finance graduate who has navigated diverse professional
-              landscapes — from building client relationships as an Account
-              Manager to diving deep into markets as a Research &amp; Investment
-              Services Analyst. I'm drawn to problems where analytical rigor
-              meets strategic thinking.
+              I'm a finance graduate with experience in financial analysis,
+              client management and investment research. My work focuses on
+              using data and financial models to uncover insights that support
+              business and investment decisions.
             </p>
             <p className="text-base text-muted-foreground leading-relaxed mb-10">
               Outside of work, I thrive in competitive environments. I've been a

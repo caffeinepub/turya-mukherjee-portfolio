@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProfile } from "@/hooks/useQueries";
-import { ArrowDown, Download, Instagram, Linkedin } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowDown, Download, Instagram, Linkedin, Mail } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const FULL_FIRST = "Turya";
 const FULL_LAST = "Mukherjee";
@@ -40,6 +40,140 @@ function useTypingAnimation() {
   }, [phase]);
 
   return { firstText, lastText, done: phase === "done" };
+}
+
+function HireMeButton() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [isOpen]);
+
+  return (
+    <div ref={containerRef} className="relative inline-flex items-center">
+      {/* Tooltip */}
+      {showTooltip && !isOpen && (
+        <div
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 pointer-events-none"
+          style={{ minWidth: "280px" }}
+        >
+          <div
+            className="px-3 py-2 rounded-xl text-xs text-center leading-snug"
+            style={{
+              background: "oklch(0.16 0.006 260 / 0.92)",
+              border: "1px solid oklch(0.70 0.01 260 / 0.30)",
+              boxShadow:
+                "0 4px 20px oklch(0 0 0 / 0.5), inset 0 1px 0 oklch(1 0 0 / 0.10)",
+              backdropFilter: "blur(12px)",
+              color: "oklch(0.85 0.005 260)",
+              whiteSpace: "normal",
+            }}
+          >
+            10 months of experience · Actively exploring full-time roles in
+            finance and strategy
+          </div>
+          {/* Arrow */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-full"
+            style={{
+              width: 0,
+              height: 0,
+              borderLeft: "6px solid transparent",
+              borderRight: "6px solid transparent",
+              borderTop: "6px solid oklch(0.70 0.01 260 / 0.30)",
+            }}
+          />
+        </div>
+      )}
+
+      {!isOpen ? (
+        /* Closed state: Hire Me button */
+        <button
+          type="button"
+          data-ocid="hero.hireme.button"
+          className="glass-button inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all"
+          onClick={() => setIsOpen(true)}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+        >
+          Hire Me
+        </button>
+      ) : (
+        /* Open state: expanded options */
+        <div
+          className="inline-flex items-center gap-2 rounded-full px-3 py-2"
+          style={{
+            background: "oklch(0.16 0.006 260 / 0.85)",
+            border: "1px solid oklch(0.70 0.01 260 / 0.35)",
+            boxShadow:
+              "0 4px 24px oklch(0 0 0 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.10)",
+            backdropFilter: "blur(16px)",
+            animation: "expandReveal 0.25s ease both",
+          }}
+        >
+          {/* Close back to Hire Me */}
+          <button
+            type="button"
+            data-ocid="hero.hireme.button"
+            className="glass-button inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold"
+            onClick={() => setIsOpen(false)}
+          >
+            Hire Me
+          </button>
+
+          <div
+            className="w-px self-stretch"
+            style={{ background: "oklch(0.70 0.01 260 / 0.25)" }}
+          />
+
+          {/* Email */}
+          <a
+            href="mailto:mukherjee.turya@gmail.com"
+            data-ocid="hero.hireme.email.button"
+            className="glass-button inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium"
+          >
+            <Mail className="w-3.5 h-3.5" />
+            Email Me
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/turya-mukherjee"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ocid="hero.hireme.linkedin.button"
+            className="glass-button inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium"
+          >
+            <Linkedin className="w-3.5 h-3.5" />
+            LinkedIn
+          </a>
+
+          {/* Resume */}
+          <a
+            href="/assets/Turya_Mukherjee_Resume_FA-2.pdf"
+            download="Turya_Mukherjee_Resume.pdf"
+            data-ocid="hero.hireme.resume.button"
+            className="glass-button inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium"
+          >
+            <Download className="w-3.5 h-3.5" />
+            Resume
+          </a>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function HeroSection() {
@@ -87,7 +221,7 @@ export function HeroSection() {
               className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase mb-6"
               style={{ animation: "fadeInUp 0.6s 0.0s ease both" }}
             >
-              Finance Major · Research &amp; Investment Professional
+              Finance Graduate · Investment Research &amp; Financial Analysis
             </p>
 
             {/* Name */}
@@ -132,8 +266,7 @@ export function HeroSection() {
               className="text-base md:text-lg text-muted-foreground mb-4 font-medium"
               style={{ animation: "fadeInUp 0.7s 0.2s ease both" }}
             >
-              Finance Major (BBA) · Account Manager · Research &amp; Investment
-              Analyst
+              Finance Graduate | Investment Research &amp; Financial Analysis
             </p>
 
             {/* Bio */}
@@ -141,14 +274,15 @@ export function HeroSection() {
               className="text-sm md:text-base text-muted-foreground max-w-md mx-auto md:mx-0 mb-10 leading-relaxed"
               style={{ animation: "fadeInUp 0.7s 0.3s ease both" }}
             >
-              I bridge the worlds of finance and strategy — from managing client
-              accounts to producing in-depth investment research. Passionate
-              about uncovering insights that drive decisions.
+              I'm a finance graduate with experience in financial analysis,
+              client management and investment research. My work focuses on
+              using data and financial models to uncover insights that support
+              business and investment decisions.
             </p>
 
             {/* CTAs */}
             <div
-              className="flex flex-wrap gap-3 justify-center md:justify-start mb-10"
+              className="flex flex-wrap gap-3 justify-center md:justify-start mb-10 items-center"
               style={{ animation: "fadeInUp 0.7s 0.4s ease both" }}
             >
               <a
@@ -160,13 +294,7 @@ export function HeroSection() {
                 <Download className="w-4 h-4" />
                 Download Resume
               </a>
-              <a
-                href="mailto:mukherjee.turya@gmail.com"
-                data-ocid="hero.hireme.button"
-                className="glass-button inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold"
-              >
-                Hire Me
-              </a>
+              <HireMeButton />
             </div>
 
             {/* Social Links */}
@@ -194,7 +322,7 @@ export function HeroSection() {
               <a
                 href={
                   profile?.socialLinks?.instagram ??
-                  "https://www.instagram.com/turjo_mukherjee_"
+                  "https://www.instagram.com/turjo_mukherjee_?igsh=eHhuNWNoeW1yM3Zl"
                 }
                 target="_blank"
                 rel="noopener noreferrer"

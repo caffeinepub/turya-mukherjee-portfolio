@@ -9,7 +9,7 @@ const experience = [
     role: "Analyst - Research and Investment Services",
     company: "Tresvista Analytics Pvt. Ltd.",
     location: "India",
-    period: "Feb 2026 – Mar 2026",
+    period: "",
     logo: "/assets/uploads/tresvista_logo-1.jpg",
     logoClass: "rounded-lg",
     bullets: [
@@ -195,9 +195,11 @@ export function ResumeSection() {
                             />
                           </div>
                         )}
-                        <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
-                          {job.period}
-                        </span>
+                        {job.period && (
+                          <span className="font-mono text-xs text-muted-foreground bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/[0.08]">
+                            {job.period}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <ul className="mb-4 space-y-1.5">

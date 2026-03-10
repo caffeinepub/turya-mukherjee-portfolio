@@ -489,3 +489,15 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Hire Me expand reveal animation */
+@keyframes expandReveal {
+  from {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
