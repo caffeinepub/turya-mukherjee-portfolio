@@ -3,7 +3,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { AlertCircle, CheckCircle2, Clock, Mail, Send } from "lucide-react";
+import {
+  AlertCircle,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+  FileText,
+  FlaskConical,
+  Handshake,
+  Mail,
+  Send,
+  UserCheck,
+  Wrench,
+} from "lucide-react";
 import { useState } from "react";
 
 const APPS_SCRIPT_URL =
@@ -24,10 +36,62 @@ const contactInfo = [
   },
 ];
 
+const emailDirectory = [
+  {
+    icon: Mail,
+    address: "hello@turyamukherjee.in",
+    purpose: "General & Introductions",
+    description:
+      "For general inquiries, introductions, or networking conversations.",
+  },
+  {
+    icon: FileText,
+    address: "contact@turyamukherjee.in",
+    purpose: "Website Contact Form",
+    description:
+      "For messages sent through the website contact form or general inquiries about this portfolio.",
+  },
+  {
+    icon: Briefcase,
+    address: "careers@turyamukherjee.in",
+    purpose: "Recruitment & Opportunities",
+    description:
+      "For recruitment opportunities, interview invitations, and professional roles.",
+  },
+  {
+    icon: Handshake,
+    address: "collaborations@turyamukherjee.in",
+    purpose: "Collaborations & Projects",
+    description:
+      "For professional collaborations, consulting opportunities, and project partnerships.",
+  },
+  {
+    icon: FlaskConical,
+    address: "research@turyamukherjee.in",
+    purpose: "Academic & Research",
+    description:
+      "For academic collaborations, research discussions, and scholarly inquiries.",
+  },
+  {
+    icon: UserCheck,
+    address: "candidate@turyamukherjee.in",
+    purpose: "Application Follow-ups",
+    description:
+      "For application follow-ups or submission of additional documents related to roles.",
+  },
+  {
+    icon: Wrench,
+    address: "support@turyamukherjee.in",
+    purpose: "Technical & Website Issues",
+    description: "For reporting technical issues or problems with the website.",
+  },
+];
+
 export function ContactSection() {
   const sectionRef = useScrollReveal<HTMLElement>();
   const headerRef = useScrollReveal<HTMLDivElement>();
   const contentRef = useScrollReveal<HTMLDivElement>();
+  const directoryRef = useScrollReveal<HTMLDivElement>();
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -115,7 +179,7 @@ export function ContactSection() {
         </div>
         <p className="text-muted-foreground mb-16 max-w-lg">
           Whether you have an opportunity, want to collaborate on research, or
-          just want to say hello \u2014 reach out.
+          just want to say hello — reach out.
         </p>
 
         <div
@@ -353,6 +417,46 @@ export function ContactSection() {
                   )}
                 </Button>
               </form>
+            )}
+          </div>
+        </div>
+
+        {/* Email Directory */}
+        <div ref={directoryRef} className="section-reveal mt-24">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-6 h-px bg-apple-blue" />
+            <h3 className="font-display text-xl font-bold text-foreground">
+              Email Directory
+            </h3>
+          </div>
+          <p className="text-muted-foreground text-sm mb-10 max-w-lg">
+            Use the right address to make sure your message reaches me quickly.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {emailDirectory.map(
+              ({ icon: Icon, address, purpose, description }, index) => (
+                <a
+                  key={address}
+                  href={`mailto:${address}`}
+                  data-ocid={`contact.directory.item.${index + 1}`}
+                  className="group glass-card rounded-2xl p-5 flex flex-col gap-3 hover:border-apple-blue/40 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-apple-blue/10 border border-apple-blue/20 flex items-center justify-center flex-shrink-0 group-hover:bg-apple-blue/20 transition-colors">
+                      <Icon className="w-4 h-4 text-apple-blue" />
+                    </div>
+                    <p className="text-xs font-semibold text-foreground leading-tight">
+                      {purpose}
+                    </p>
+                  </div>
+                  <p className="text-[11px] font-mono text-apple-blue group-hover:underline underline-offset-2 break-all">
+                    {address}
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {description}
+                  </p>
+                </a>
+              ),
             )}
           </div>
         </div>

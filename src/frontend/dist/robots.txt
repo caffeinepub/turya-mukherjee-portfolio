@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://turya-mukherjee-portfolio-nza.caffeine.xyz/sitemap.xml
